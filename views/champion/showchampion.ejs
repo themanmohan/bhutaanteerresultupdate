@@ -1,0 +1,58 @@
+<%- include(`../partials/root/head`) %>
+
+<%- include(`../partials/root/head-end`) %>
+
+<%- include(`../partials/root/header`) %>
+
+<div>
+    <h6 class="dateclass">TEER CHAMPIONS</h6>
+</div>
+<div class="sectionresult">
+    <%if(currentUser){%>
+        <%if(currentUser.role.includes('admin')){%>
+            
+                <a type="button" href="/teerchampion/addteerchampion" class="buttonresultfr">Add Teer Champion</a>
+          
+        <%}%>
+    <%}%>
+</div>
+    <hr style="width:50%;text-align:center;background-color:black;">
+    <table>
+    
+        <tr>  
+          <th class="thbg">Year</th>
+          <th class="thbg">Name</th>
+            <%if(currentUser){%>
+                <%if(currentUser.role.includes('admin')){%>
+                  <th class="thbg">Action</th>
+                <%}%>
+            <%}%>
+        </tr>
+        <%teerchampion.forEach((data)=>{%>
+        <tr>
+          <td><%=data.year%></td>
+          <td><%=data.name%></td>
+          
+                <%if(currentUser){%>
+                    <%if(currentUser.role.includes('admin')){%>
+                        <td>
+                        <form style="text-align: center;"
+                            action="/teerchampion/<%=data._id %>/delete?_method=DELETE" method="POST">
+                            <button class="buttondelete">Delete</button>
+                        </form>
+                       
+                    <%}%>
+                <%}%>
+            </td>
+      </tr>
+    <%})%>
+
+</table>
+      
+      
+<%- include(`../partials/root/elements/projectCard`) %>
+
+<%- include(`../partials/root/footer`) %>
+
+<%- include(`../partials/root/end`) %>
+    

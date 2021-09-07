@@ -1,0 +1,103 @@
+<%- include(`../partials/root/head`) %>
+
+<%- include(`../partials/root/head-end`) %>
+
+<%- include(`../partials/root/header`) %>
+
+<div>
+    <h6 class="dateclass">PREVIOUS RESULTS</h6>
+    </div>
+    <div class="sectionresult">
+    <%if(currentUser){%>
+        <%if(currentUser.role.includes('admin')){%>
+            <a href="/previousresult/addpreviousresult" type="button" class="buttonresultfr">Add Previous Result</a>
+        <%}%>
+    <%}%>
+</div>
+    <div class="sectionresult">
+        <form action="/previousresult/search" method="POST">
+           
+       
+                <label for="date" style="font-weight: bold;">Start Date</label>
+                <input type="date" name="startdate" 
+                    placeholder="Date">
+           
+
+           
+                <label for="date" style="font-weight: bold;">End Date</label>
+                <input type="date" name="enddate" \
+                    placeholder="Date">
+            
+           
+            <button type="submit" class="buttonsubmit" >Search</button>
+        </form>
+    </div>
+    <hr style="width:50%;text-align:center;background-color:black;">
+
+<table>
+    <tr>
+        <th colspan=5 class="thbghead">RESULTS</th>
+        
+        </tr>
+  <tr>
+    
+    
+
+    <th class="thbg">CITY</th>
+    <th class="thbg">DATE</th>
+    <th class="thbg">F/R</th>
+    <th class="thbg">S/R</th>
+    <%if(currentUser){%>
+        <%if(currentUser.role.includes('admin')){%>
+    <th class="thbg">Action</th>
+    <%}%>
+        <%}%>
+  </tr>
+  <%result.previousresult.forEach((data)=>{%>
+  <tr>
+
+    <td><%=data.city%></td>
+    <td><%=data.date%></td>
+    <td><%=data.firstround%></td>
+    <td><%=data.secondround%></td>
+    <%if(currentUser){%>
+        <%if(currentUser.role.includes('admin')){%>
+    <td>
+        <form action="/previousresult/<%=data._id %>/delete?_method=DELETE" method="POST">
+            <button class="buttondelete" class="">Delete</button>
+        </form>
+    </td>
+        <%}%>
+            <%}%>
+    
+
+</tr>
+<%})%>
+
+</table>
+<div class="sectionresult">
+<div class="pagination" style="margin-top:20px">
+<%if(result.next &&result.next.page<=result.count){%>
+    <a style="display: inline-block;" href="/previousresult?page=<%=result.next.page%>&limit=20">
+        &raquo;
+    </a>
+    <%}%>
+        <%for(i=1; i<=result.count; i++){%>
+            <a style="display: inline-block; text-decoration: none;" href="/previousresult?page=<%=i%>&limit=20">
+                <%=i%>
+            </a>
+            <%}%>
+
+                <%if(result.previous){%>
+                    <a style="display: inline-block;" href="/previousresult?page=<%=result.previous.page%>&limit=20">
+                        &laquo;
+                    </a>
+                    <%}%>
+                </div>
+            </div>
+<%- include(`../partials/root/elements/projectCard`) %>
+
+<%- include(`../partials/root/footer`) %>
+
+<%- include(`../partials/root/end`) %>
+    

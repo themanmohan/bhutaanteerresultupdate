@@ -1,0 +1,53 @@
+<%- include(`../partials/root/head`) %>
+
+<%- include(`../partials/root/head-end`) %>
+
+<%- include(`../partials/root/header`) %>
+
+<div>
+    <h6 class="dateclass">REPUTED COUNTERS</h6>
+</div>
+<div class="sectionresult">
+<%if(currentUser){%>
+    <%if(currentUser.role.includes('admin')){%>
+        <a href="/reputedcounter/addreputedcounter" type="button" class="buttonresultfr">Add Reputed Counter</a>
+    <%}%>
+<%}%>
+</div>
+    <hr style="width:50%;text-align:center;background-color:black;">
+
+<table>
+    <tr>
+        <th class="thbg">License No.</th>
+        <th class="thbg">Address</th>
+        <%if(currentUser){%>
+            <%if(currentUser.role.includes('admin')){%>
+        <th class="thbg">Action</th>
+         <%}%>
+        <%}%>
+    </tr>
+
+    <%reputedcounter.forEach((data)=>{%>               
+        <tr>
+            
+            <td><%=data.licenseno%></td>
+            <td><%=data.address%></td>
+            <%if(currentUser){%>
+                <%if(currentUser.role.includes('admin')){%>
+            <td><form action="/reputedcounter/<%=data._id %>/delete?_method=DELETE" method="POST">
+                <button class="buttondelete" class="">Delete</button>
+            </form></td>
+                <%}%>
+            <%}%>
+        </tr>
+    <%})%>
+</table>
+
+
+      
+<%- include(`../partials/root/elements/projectCard`) %>
+
+<%- include(`../partials/root/footer`) %>
+
+<%- include(`../partials/root/end`) %>
+    

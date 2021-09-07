@@ -1,0 +1,113 @@
+
+<%- include(`./partials/root/head`) %>
+
+<%- include(`./partials/root/head-end`) %>
+
+<%- include(`./partials/root/header`) %>
+
+<div>
+    <h6 class="dateclass"><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric' , month: 'long' , day: '2-digit' }).format(new Date()) %></h6>
+    </div>
+    <table>
+      <div class="sectionresult">
+        <%if(currentUser){%>
+            <%if(currentUser.role.includes('admin')){%>
+                <a  class="buttonresultfr" href="/result/addresult">Add Result Data</a>
+            <%}%>
+        <%}%>
+      </div>
+    <tr>
+    <th colspan=3 class="thbghead">BHUTAN TEER</th>
+    </tr>
+    <%if(result.length>0){%>
+        <%result.forEach((data)=>{%>
+            <tr>
+                <th class="thbg">F/R(<%=data.round1.time%>)</th>
+                <th class="thbg">S/R(<%=data.round2.time%>)</th>
+
+                <%if(currentUser){%>
+                    <%if(currentUser.role.includes('admin')){%>
+                    <th class="thbg" >Action</th>
+                    <%}%>
+                <%}%>
+
+            </tr>
+            <tr>
+                <td><%=data.round1.result%></td>
+                <td><%=data.round2.result%></td>
+                <%if(currentUser){%>
+                    <%if(currentUser.role.includes('admin')){%>
+                      <td>
+                        <form action="/result/<%=data._id %>/delete?_method=DELETE" method="POST">
+                            <button class="buttondelete" class="">Delete
+                            </button>
+                        </form>
+                      </td>
+                   <%}%>
+                <%}%>
+            </tr>
+        <%})%>
+   <%}else{%>
+
+          <th class="thbg" >F/R [XX]</th>
+          <th class="thbg" >S/R [XX]</th>
+        <tr>
+          <td>XX.XX</td>
+          <td>XX:XX</td>
+        </tr>   
+    <%}%>
+
+    </table>
+
+    <main class="grid">
+        <article>
+            <a href="/commonnumber">
+          <img src="/images/commonnumber.jpg" alt="Sample photo" >
+        </a>
+        </article>
+        <article>
+            <a href="#">
+          <img src="/images/teerbhutansocial.jpg" alt="Sample photo">
+        </a>
+        </article>
+        <article>
+            <a href="/dreamnumber" >
+          <img src="/images/dreamnumber.jpg" alt="Sample photo">
+        </a>
+        </article>
+        <article>
+            <a href="/teerchampion/analytics">
+          <img src="/images/analytics.jpg" alt="Sample photo">
+        </a>
+        </article>
+        <article>
+            <a href="/predicttarget">
+          <img src="/images/predictedcounter.jpg" alt="Sample photo">
+        </a>
+        </article>
+        <article>
+            <a href="/previousresult?page=1&limit=20">
+          <img src="/images/previousresults.jpg" alt="Sample photo">
+        </a>
+        </article>
+        <article>
+            <a href="/teercalender">
+          <img src="/images/teercalendar.jpg" alt="Sample photo">
+        </a>
+        </article>
+        <article>
+            <a href="/reputedcounter">
+          <img src="/images/reputedcounter.jpg" alt="Sample photo">
+        </a>
+        </article>
+        <article>
+            <a href="/teerchampion">
+          <img src="/images/champions.jpg" alt="Sample photo">
+        </a>
+        </article>
+      </main>
+     
+
+    <%- include(`./partials/root/footer`) %>
+
+    <%- include(`./partials/root/end`) %>

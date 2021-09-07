@@ -1,0 +1,48 @@
+<%- include(`../partials/root/head`) %>
+
+<%- include(`../partials/root/head-end`) %>
+
+<%- include(`../partials/root/header`) %>
+
+<div>
+    <h6 class="dateclass"><%= new Intl.DateTimeFormat('en-GB', { year: 'numeric' , month: 'long' , day: '2-digit' }).format(new Date()) %></h6>
+    </div>
+
+  <div class="sectionresult">
+    <%if(currentUser){%>
+        <%if(currentUser.role.includes('admin')){%>
+            <a href="/predicttarget/addpredicttarget" type="button" class="buttonresultfr">Update Predict Target</a>
+        <%}%>
+    <%}%>
+</div>
+
+    <hr style="width:50%;text-align:center;background-color:black;">
+
+<table>
+    <tr>
+        <th colspan=4 class="thbghead">BHUTAN</th>
+        </tr>
+  <tr>
+    
+    
+
+    <th class="thbg">Target</th>
+  </tr>
+  <tr>
+
+    <td><%=predicttarget.number%></td>
+    
+    
+
+</tr>
+
+
+</table>
+
+      
+<%- include(`../partials/root/elements/projectCard`) %>
+
+<%- include(`../partials/root/footer`) %>
+
+<%- include(`../partials/root/end`) %>
+    
