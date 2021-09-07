@@ -19,7 +19,7 @@ const dbURL = `mongodb://127.0.0.1:27017`;
 
 
 let dbNameToUse = `onlinebhutaanteerresult`,
-    dbURLToUse = `mongodb://127.0.0.1:27017/`
+    dbURLToUse = `mongodb+srv://bhutanteerresults:Bhutan@0011@bhutanteerresult.uuygs.mongodb.net?retryWrites=true&w=majority`
 
 if((process.env.MODE) && (process.env.MODE.toLowerCase().trim() === `prod`)){
     dbNameToUse = `onlinebhutaanteerresultproduction`,
